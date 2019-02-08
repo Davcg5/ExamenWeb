@@ -1,0 +1,60 @@
+<%- include('common/header',{titulo:titulo,
+esAdministrador:esAdministrador,esUsuario:esUsuario,logedin:logedin,nombreUsuario:nombreUsuario})
+%>
+
+<div class="container mt-3 mb-5">
+  <% const errorb = typeof error !== "undefined" ? true : false; %> <%
+  if(errorb){ %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> Al crear evento.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <% } %>
+  <h3>Crear Evento</h3>
+  <form action="/evento/crear" method="POST">
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" id="nombre" name="nombre" />
+    </div>
+    <div class="form-group">
+      <label for="fecha">Fecha</label>
+      <input type="date" class="form-control" id="fecha" name="fecha" />
+    </div>
+    <div class="form-group">
+      <label for="latitud">Latitud</label>
+      <input type="text" class="form-control" id="latitud" name="latitud" />
+    </div>
+    <div class="form-group">
+      <label for="longitud">Longitud</label>
+      <input type="text" class="form-control" id="longitud" name="longitud" />
+    </div>
+    <div class="form-group">
+      <label for="jugadores[]">Jugadores</label>
+      <% jugadores.forEach((jugador)=>{ %>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <input
+              type="checkbox"
+              name="jugadores[]"
+              id="jugadores[]"
+              value="<%= jugador.id %>"
+            />
+          </div>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          disabled
+          value="<%= jugador.nombre_completo_jugador %> - <%= jugador.equipo.nombre %>"
+        />
+      </div>
+      <% }) %>
+    </div>
+    <button class="btn btn-primary">Crear</button>
+  </form>
+</div>
+
+<%- include('common/libraries')%>

@@ -1,0 +1,42 @@
+<%- include('common/header',{titulo:titulo,
+esAdministrador:esAdministrador,esUsuario:esUsuario,logedin:logedin,nombreUsuario:nombreUsuario})
+%>
+
+<div class="container">
+  <form action="/equipo/inicio" method="GET">
+    <div class="form-group p-3">
+      <label for="busqueda">Busqueda</label>
+      <div class="input-group mb-3">
+        <input id="busqueda" type="text" class="form-control" name="busqueda" />
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Liga</th>
+        <th scope="col">Fecha Creacion</th>
+        <th scope="col">No. Copas Internacionales</th>
+        <th scope="col">Campeon Actual</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% arreglo.forEach((equipo)=>{ %>
+      <tr>
+        <td><%= equipo.nombre %></td>
+        <td><%= equipo.liga %></td>
+        <td><%= equipo.fecha_creacion %></td>
+        <td><%= equipo.numero_copas_internacionales %></td>
+        <td><%= equipo.campeon_actual ? 'Si' : 'No'; %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('common/libraries')%>

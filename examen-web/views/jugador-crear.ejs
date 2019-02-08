@@ -1,0 +1,78 @@
+<%- include('common/header',{titulo:titulo,
+esAdministrador:esAdministrador,esUsuario:esUsuario,logedin:logedin,nombreUsuario:nombreUsuario})
+%>
+
+<div class="container mt-3 mb-5">
+  <% const errorb = typeof error !== "undefined" ? true : false; %> <%
+  if(errorb){ %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> Al crear jugador.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <% } %>
+  <h3>Crear Jugador</h3>
+  <form action="/jugador/crear" method="POST">
+    <div class="form-group">
+      <label for="numero_camiseta">Numero Camiseta</label>
+      <input
+        type="number"
+        class="form-control"
+        id="numero_camiseta"
+        name="numero_camiseta"
+      />
+    </div>
+    <div class="form-group">
+      <label for="nombre_camiseta">Nombre Camiseta</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nombre_camiseta"
+        name="nombre_camiseta"
+      />
+    </div>
+    <div class="form-group">
+      <label for="nombre_completo_jugador">Nombre Completo Jugador</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nombre_completo_jugador"
+        name="nombre_completo_jugador"
+      />
+    </div>
+    <div class="form-group">
+      <label for="poder_especial_dos">Poder Especial Dos</label>
+      <input
+        type="text"
+        class="form-control"
+        id="poder_especial_dos"
+        name="poder_especial_dos"
+      />
+    </div>
+    <div class="form-group">
+      <label for="fecha_ingreso_equipo">Fecha Ingreso Equipo</label>
+      <input
+        type="date"
+        class="form-control"
+        id="fecha_ingreso_equipo"
+        name="fecha_ingreso_equipo"
+      />
+    </div>
+    <div class="form-group">
+      <label for="goles">Goles</label>
+      <input type="number" class="form-control" id="goles" name="goles" />
+    </div>
+    <div class="form-group">
+      <label for="equipo">Equipo</label>
+      <select name="equipo" class="form-control" id="equipo">
+        <% equipos.forEach((equipo)=>{ %>
+        <option value="<%= equipo.id %>"><%= equipo.nombre %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button class="btn btn-primary">Crear</button>
+  </form>
+</div>
+
+<%- include('common/libraries')%>

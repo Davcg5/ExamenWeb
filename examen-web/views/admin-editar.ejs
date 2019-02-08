@@ -1,0 +1,99 @@
+<%- include('common/header',{titulo:titulo,
+esAdministrador:esAdministrador,esUsuario:esUsuario,logedin:logedin,nombreUsuario:nombreUsuario})
+%>
+
+<div class="container mt-5">
+  <% const errorb = typeof error !== "undefined" ? true : false; %> <%
+  if(errorb){ %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> El usuario ya posee ese rol.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <% } %>
+  <div class="row">
+    <div class="col-sm-5">
+      <h3>Usuario</h3>
+    </div>
+    <div class="col-sm-4">
+      <h3>Roles</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+      <form>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            type="text"
+            disabled
+            class="form-control"
+            id="nombre"
+            name="nombre"
+            value="<%= usuarioActualizar.nombre %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo</label>
+          <input
+            type="email"
+            disabled
+            class="form-control"
+            id="correo"
+            name="correo"
+            value="<%= usuarioActualizar.correo %>"
+          />
+        </div>
+        <div class="form-group">
+          <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+          <input
+            type="date"
+            disabled
+            class="form-control"
+            id="fecha_nacimiento"
+            name="fecha_nacimiento"
+            value="<%= usuarioActualizar.fecha_nacimiento %>"
+          />
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-4">
+      <% usuarioActualizar.roles.forEach((rol)=>{ %>
+      <div class="chip">
+        <form
+          action="/usuario/quitarRol/<%= usuarioActualizar.id %>"
+          method="POST"
+          id="<%= rol.nombre %>"
+        >
+          <%= rol.nombre %>
+          <input type="hidden" id="rol" name="rol" value="<%= rol.id %>" />
+          <span
+            class="closebtn"
+            onclick="document.forms['<%= rol.nombre %>'].submit()"
+            >&times;</span
+          >
+        </form>
+      </div>
+      <% }) %>
+    </div>
+    <div class="col-sm-3">
+      <form
+        action="/usuario/agregarRol/<%= usuarioActualizar.id %>"
+        method="POST"
+      >
+        <div class="form-group">
+          <label for="roles">Agregar Roles</label>
+          <select name="roles" class="form-control" id="roles">
+            <% roles.forEach((rol)=>{ %>
+            <option value="<%= rol.id %>"><%= rol.nombre %></option>
+            <% }) %>
+          </select>
+        </div>
+        <button class="btn btn-primary">Agregar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('common/libraries')%>

@@ -1,0 +1,65 @@
+<%-
+include('common/header',{titulo:titulo,esAdministrador:esAdministrador,logedin:logedin,nombreUsuario:nombreUsuario})
+%>
+
+<div class="container">
+  <form action="/admin/inicio" method="GET">
+    <div class="form-group p-3">
+      <label for="busqueda">Busqueda</label>
+      <div class="input-group mb-3">
+        <input id="busqueda" type="text" class="form-control" name="busqueda" />
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Fecha Nacimiento</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% arreglo.forEach((usuario)=>{ %>
+      <tr>
+        <td><%= usuario.nombre %></td>
+        <td><%= usuario.correo %></td>
+        <td><%= usuario.fecha_nacimiento %></td>
+        <td>
+          <a
+            href="/admin/editarRoles/<%= usuario.id %>"
+            class="btn btn-outline-info btn-block mb-2"
+          >
+            Actualizar
+          </a>
+          <form action="/usuario/borrar/<%= usuario.id %>" method="POST">
+            <button
+              type="submit"
+              class="btn btn-outline-danger btn-block"
+              onclick="borrar(event)"
+            >
+              Eliminar
+            </button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('common/libraries') %>
+
+<script>
+  function borrar(evento) {
+    const respuesta = confirm('¿Estas seguro?');
+    if (!respuesta) {
+      event.preventDefault();
+    }
+  }
+</script>

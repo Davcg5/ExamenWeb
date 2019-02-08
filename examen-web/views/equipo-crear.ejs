@@ -1,0 +1,56 @@
+<%- include('common/header',{titulo:titulo,
+esAdministrador:esAdministrador,esUsuario:esUsuario,logedin:logedin,nombreUsuario:nombreUsuario})
+%>
+
+<div class="container mt-3 mb-5">
+  <% const errorb = typeof error !== "undefined" ? true : false; %> <%
+  if(errorb){ %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> Al crear equipo.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <% } %>
+  <h3>Crear Equipo</h3>
+  <form action="/equipo/crear" method="POST">
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" id="nombre" name="nombre" />
+    </div>
+    <div class="form-group">
+      <label for="liga">Liga</label>
+      <input type="text" class="form-control" id="liga" name="liga" />
+    </div>
+    <div class="form-group">
+      <label for="fecha_creacion">Fecha de Creacion</label>
+      <input
+        type="date"
+        class="form-control"
+        id="fecha_creacion"
+        name="fecha_creacion"
+      />
+    </div>
+    <div class="form-group">
+      <label for="numero_copas_internacionales"
+        >Numero Copas Internacionales</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="numero_copas_internacionales"
+        name="numero_copas_internacionales"
+      />
+    </div>
+    <div class="form-group">
+      <label for="campeon_actual">Campeon Actual</label>
+      <select name="campeon_actual" class="form-control" id="campeon_actual">
+        <option value="true">Verdadero</option>
+        <option value="false">Falso</option>
+      </select>
+    </div>
+    <button class="btn btn-primary">Crear</button>
+  </form>
+</div>
+
+<%- include('common/libraries')%>

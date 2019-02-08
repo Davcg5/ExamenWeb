@@ -1,0 +1,35 @@
+<%- include('common/header',{titulo:titulo,
+esAdministrador:esAdministrador,esUsuario:esUsuario,logedin:logedin,nombreUsuario:nombreUsuario})
+%>
+
+<div class="container mt-3 mb-5">
+  <% const errorb = typeof error !== "undefined" ? true : false; %> <%
+  if(errorb){ %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> En inicio de sesion verifique sus datos.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <% } %>
+  <h3>Login</h3>
+  <form action="/login" method="POST">
+    <div class="form-group">
+      <label for="correo">Correo</label>
+      <input type="email" class="form-control" id="correo" name="correo" />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+      />
+    </div>
+    <button class="btn btn-primary">Login</button>
+    <a class="btn btn-success" href="/register">Registrarse</a>
+  </form>
+</div>
+
+<%- include('common/libraries') %>

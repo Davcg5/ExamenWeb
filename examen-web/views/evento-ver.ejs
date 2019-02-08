@@ -1,0 +1,114 @@
+<%- include('common/header',{titulo:titulo,
+    esAdministrador:esAdministrador,esUsuario:esUsuario,logedin:logedin,nombreUsuario:nombreUsuario}) %>
+
+<div class="container mt-3 mb-5">
+  <h3>Evento</h3>
+  <form>
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input
+        type="text"
+        disabled
+        class="form-control"
+        id="nombre"
+        name="nombre"
+        value="<%= evento.nombre %>"
+      />
+    </div>
+    <div class="form-group">
+      <label for="fecha">Fecha</label>
+      <input
+        type="date"
+        disabled
+        class="form-control"
+        id="fecha"
+        name="fecha"
+        value="<%= evento.fecha %>"
+      />
+    </div>
+    <label>Ubicacion</label>
+    <iframe
+      width="100%"
+      height="300"
+      frameborder="0"
+      scrolling="no"
+      marginheight="0"
+      marginwidth="0"
+      src="https://maps.google.com/maps?q=<%= "-0.210354,-78.488865" %>&hl=es;z=14&amp;output=embed"
+    >
+    </iframe>
+  </form>
+  <h4 class="mt-2">Jugadores</h4>
+  <div class="row">
+        <% evento.jugadores.forEach((jugador)=>{ %>
+      <div class="col-sm-4">
+            <form>
+                    <div class="form-group">
+                      <label for="numero_camiseta">Numero Camiseta</label>
+                      <input
+                        type="number"
+                        disabled
+                        class="form-control"
+                        id="numero_camiseta"
+                        name="numero_camiseta"
+                        value="<%= jugador.numero_camiseta %>"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="nombre_camiseta">Nombre Camiseta</label>
+                      <input
+                        type="text"
+                        disabled
+                        class="form-control"
+                        id="nombre_camiseta"
+                        name="nombre_camiseta"
+                        value="<%= jugador.nombre_camiseta %>"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="nombre_completo_jugador">Nombre Completo Jugador</label>
+                      <input
+                        type="text"
+                        disabled
+                        class="form-control"
+                        id="nombre_completo_jugador"
+                        name="nombre_completo_jugador"
+                        value="<%= jugador.nombre_completo_jugador %>"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="poder_especial_dos">Poder Especial Dos</label>
+                      <input
+                        type="text"
+                        disabled
+                        class="form-control"
+                        id="poder_especial_dos"
+                        name="poder_especial_dos"
+                        value="<%= jugador.poder_especial_dos %>"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="fecha_ingreso_equipo">Fecha Ingreso Equipo</label>
+                      <input
+                        type="date"
+                        disabled
+                        class="form-control"
+                        id="fecha_ingreso_equipo"
+                        name="fecha_ingreso_equipo"
+                        value="<%= jugador.fecha_ingreso_equipo %>"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="goles">Goles</label>
+                      <input type="number" disabled class="form-control" 
+                      id="goles" name="goles" 
+                      value="<%= jugador.goles %>"/>
+                    </div>
+                  </form>
+      </div>
+      <% }) %>
+  </div>
+  
+</div>
+
+<%- include('common/libraries')%>
